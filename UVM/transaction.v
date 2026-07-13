@@ -12,4 +12,5 @@ class transaction extends uvm_sequence_item;
     endfunction
 
     
+
 endclass

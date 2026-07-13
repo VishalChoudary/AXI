@@ -1,0 +1,47 @@
+{
+  // ===== Disable code suggestion "ideas" (IntelliSense autocomplete popup) =====
+
+  // Turn off the autocomplete popup that appears while typing
+  "editor.quickSuggestions": {
+    "other": false,
+    "comments": false,
+    "strings": false
+  },
+
+  // Don't suggest words from other open files
+  "editor.wordBasedSuggestions": "off",
+
+  // Disable inline ghost-text suggestions (e.g., Copilot-style completions)
+  "editor.inlineSuggest.enabled": false,
+
+  // Disable the parameter hint widget inside function brackets
+  "editor.parameterHints.enabled": false,
+
+  // Don't accept suggestions on Enter
+  "editor.acceptSuggestionOnEnter": "off",
+
+  // Hide word/snippet entries in the suggestion widget
+  "editor.suggest.showWords": false,
+  "editor.suggest.showSnippets": false,
+
+  // ===== Keep these ON (spacing, auto-brackets, formatting) =====
+
+  // Auto-closing of brackets and quotes stays enabled (default behavior)
+  "editor.autoClosingBrackets": "languageDefined",
+  "editor.autoClosingQuotes": "languageDefined",
+
+  // Auto-surround selections with brackets/quotes stays enabled
+  "editor.autoSurround": "languageDefined",
+
+  // Keep auto-indentation and formatting on type
+  "editor.formatOnType": true,
+  "editor.autoIndent": "full",
+
+  // Keep hover tooltips (documentation) enabled
+  "editor.hover.enabled": "on",
+
+  // Keep tab size / spacing behavior
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": true
+}
