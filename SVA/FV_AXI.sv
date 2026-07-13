@@ -45,7 +45,7 @@ module fv_axi(
  	input logic [1:0] rresp,		//read response signal
  	input logic rlast,		//read data last signal
 	input logic rvalid,		//read data valid signal
-	input logic rready
+ 	input logic rready
   
 );
 
