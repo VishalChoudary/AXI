@@ -1,3 +1,11 @@
+`ifndef ENV_SV
+`define ENV_SV
+
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+`include "agent.sv"
+
 class env extends uvm_env;
 `uvm_component_utils(env)
  
@@ -16,3 +24,5 @@ endfunction
  
  
 endclass
+
+`endif

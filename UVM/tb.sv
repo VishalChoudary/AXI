@@ -1,3 +1,10 @@
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+`include "../axi_if.sv"
+`include "../design/AXI_DESIGN.v"
+`include "test.sv"
+
 module tb;
  
  axi_if vif();

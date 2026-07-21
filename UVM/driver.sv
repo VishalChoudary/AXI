@@ -4,7 +4,7 @@
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
-`include "axi_if.sv"
+`include "../axi_if.sv"
 `include "transaction.sv"
 
 class driver extends uvm_driver #(transaction);

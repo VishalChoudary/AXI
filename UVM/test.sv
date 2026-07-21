@@ -1,3 +1,16 @@
+`ifndef TEST_SV
+`define TEST_SV
+
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+`include "env.sv"
+`include "rst_dut.sv"
+`include "valid_wrrd_fixed.sv"
+`include "valid_wrrd_incr.sv"
+`include "valid_wrrd_wrap.sv"
+`include "err_wrrd_fix.sv"
+
 class test extends uvm_test;
 `uvm_component_utils(test)
  
@@ -39,3 +52,5 @@ vwrrdfx.start(e.a.seqr);
 phase.drop_objection(this);
 endtask
 endclass
+
+`endif

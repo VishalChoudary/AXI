@@ -1,3 +1,13 @@
+`ifndef AGENT_SV
+`define AGENT_SV
+
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+`include "transaction.sv"
+`include "driver.sv"
+`include "monitor.sv"
+
 class agent extends uvm_agent;
 `uvm_component_utils(agent)
   
@@ -27,3 +37,5 @@ super.connect_phase(phase);
 endfunction
  
 endclass
+
+`endif
