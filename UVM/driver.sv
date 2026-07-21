@@ -1,3 +1,12 @@
+`ifndef DRIVER_SV
+`define DRIVER_SV
+
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+`include "axi_if.sv"
+`include "transaction.sv"
+
 class driver extends uvm_driver #(transaction);
   `uvm_component_utils(driver)
   
@@ -63,14 +72,14 @@ class driver extends uvm_driver #(transaction);
             vif.awsize      <= 2;
             vif.awaddr      <= 5;
             vif.awburst     <= 0;
-     
-     
+      
+      
             vif.wvalid      <= 1'b1;
             vif.wid         <= tr.id;
             vif.wdata       <= $urandom_range(0,10);
             vif.wstrb       <= 4'b1111;
             vif.wlast       <= 0;
-     
+      
             vif.arvalid     <= 1'b0;  ///turn off read 
             vif.rready      <= 1'b0;
             vif.bready      <= 1'b0;
@@ -97,8 +106,8 @@ class driver extends uvm_driver #(transaction);
    endtask
    
    ///////////////////////////////////////////////////////// read transaction in fixed mode
-   
-        task  wrrd_fixed_rd(); 
+    
+         task  wrrd_fixed_rd(); 
         `uvm_info("DRV", "Fixed Mode Read Transaction Started", UVM_NONE);   
         @(posedge vif.clk);
  
@@ -123,8 +132,8 @@ class driver extends uvm_driver #(transaction);
   endtask
   
  ////////////////////////////////////////////////////////////////////// 
- 
   
+   
    task wrrd_incr_wr();
    /////////////////////////write logic
     `uvm_info("DRV", "INCR Mode Write Transaction Started", UVM_NONE);
@@ -135,14 +144,14 @@ class driver extends uvm_driver #(transaction);
             vif.awsize      <= 2;
             vif.awaddr      <= 5;
             vif.awburst     <= 1;
-     
-     
+      
+      
             vif.wvalid      <= 1'b1;
             vif.wid         <= tr.id;
             vif.wdata       <= $urandom_range(0,10);
             vif.wstrb       <= 4'b1111;
             vif.wlast       <= 0;
-     
+      
             vif.arvalid     <= 1'b0;  ///turn off read 
             vif.rready      <= 1'b0;
             vif.bready      <= 1'b0;
@@ -195,7 +204,7 @@ class driver extends uvm_driver #(transaction);
   endtask
  
 //////////////////////////////////////////////////////////////////////////////
- 
+  
    task wrrd_wrap_wr();
     `uvm_info("DRV", "WRAP Mode Write Transaction Started", UVM_NONE);  
    /////////////////////////write logic
@@ -206,14 +215,14 @@ class driver extends uvm_driver #(transaction);
             vif.awsize      <= 2;
             vif.awaddr      <= 5;
             vif.awburst     <= 2;
-     
-     
+      
+      
             vif.wvalid      <= 1'b1;
             vif.wid         <= tr.id;
             vif.wdata       <= $urandom_range(0,10);
             vif.wstrb       <= 4'b1111;
             vif.wlast       <= 0;
-     
+      
             vif.arvalid     <= 1'b0;  ///turn off read 
             vif.rready      <= 1'b0;
             vif.bready      <= 1'b0;
@@ -269,7 +278,7 @@ class driver extends uvm_driver #(transaction);
   endtask
   
   //////////////////////////////////////////////////////////////////////////
-  
+   
       task err_wr();
       `uvm_info("DRV", "Error Write Transaction Started", UVM_NONE);
    
@@ -281,14 +290,14 @@ class driver extends uvm_driver #(transaction);
             vif.awsize      <= 2;
             vif.awaddr      <= 128;
             vif.awburst     <= 0;
-     
-     
+      
+      
             vif.wvalid      <= 1'b1;
             vif.wid         <= tr.id;
             vif.wdata       <= $urandom_range(0,10);
             vif.wstrb       <= 4'b1111;
             vif.wlast       <= 0;
-     
+      
             vif.arvalid     <= 1'b0;  ///turn off read 
             vif.rready      <= 1'b0;
             vif.bready      <= 1'b0;
@@ -380,3 +389,5 @@ class driver extends uvm_driver #(transaction);
  
   
 endclass
+
+`endif

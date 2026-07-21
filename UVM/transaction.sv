@@ -1,9 +1,15 @@
+`ifndef TRANSACTION_SV
+`define TRANSACTION_SV
+
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
 typedef enum bit [2:0] {wrrdfixed = 0, wrrdincr = 1, wrrdwrap = 2, wrrderrfix = 3,   rstdut = 4 } oper_mode;
  
 class transaction extends uvm_sequence_item;
   `uvm_object_utils(transaction)
   
-   
+    
  
   function new(string name = "transaction");
     super.new(name);
@@ -62,7 +68,7 @@ endclass : transaction
  
  
  
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
  
 class rst_dut extends uvm_sequence#(transaction);
   `uvm_object_utils(rst_dut)
@@ -207,6 +213,5 @@ class err_wrrd_fix extends uvm_sequence#(transaction);
   
  
 endclass
- 
- 
- 
+
+`endif

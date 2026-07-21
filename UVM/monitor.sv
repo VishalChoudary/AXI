@@ -1,3 +1,12 @@
+`ifndef MONITOR_SV
+`define MONITOR_SV
+
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+`include "axi_if.sv"
+`include "transaction.sv"
+
 class mon extends uvm_monitor;
 `uvm_component_utils(mon)
  
@@ -114,3 +123,5 @@ virtual axi_if vif;
 endtask 
  
 endclass
+
+`endif
