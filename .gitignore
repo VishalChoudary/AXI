@@ -1,0 +1,65 @@
+# Compiled/Object files
+*.o
+*.so
+*.obj
+*.elf
+
+# Simulation waveforms
+*.vcd
+*.fst
+*.lxt
+*.lxt2
+*.ghw
+*.awcf
+*.wlf
+vsim.wlf
+
+# Simulation logs and transcripts
+transcript
+*.log
+ultra.log
+dve.log
+verdi.log
+novas.log
+*.fsdb
+
+# ModelSim / QuestaSim / VCS work directories
+work/
+_work/
+vwork/
+csrc/
+modelsim.ini
+qsim.ini
+
+# Vivado
+*.jou
+*.str
+*.bak
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+*.synth/
+*.webtalk.*
+Xil/
+*.bit
+*.bin
+
+# Quartus
+db/
+incremental_db/
+output_files/
+*.qws
+*.rpt
+*.sof
+*.pof
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/*
+!.vscode/settings.json

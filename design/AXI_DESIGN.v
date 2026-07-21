@@ -41,7 +41,7 @@ module axi_slave(
    input	arvalid,	//address read valid signal
 	
  ///////////////////read data channel
-   	output reg [3:0] rid,		//read data id
+  output reg [3:0] rid,		//read data id
 	output reg [31:0]rdata,     //read data from slave
  	output reg [1:0] rresp,		//read response signal
 	output reg rlast,		//read data last signal
@@ -56,6 +56,12 @@ module axi_slave(
   awstate_type awstate, awnext_state;
   
   reg [31:0] awaddrt;
+  
+  typedef enum bit [2:0] {widle = 0, wstart = 1, wreadys = 2, wvalids = 3, waddr_dec = 4} wstate_type;
+  wstate_type wstate, wnext_state;
+  
+  typedef enum bit [1:0] {bidle = 0, bdetect_last = 1, bstart = 2, bwait = 3} bstate_type;
+  bstate_type bstate, bnext_state;
   
   //////reset decoder 
   always_ff@(posedge clk , negedge resetn)
@@ -114,10 +120,14 @@ module axi_slave(
   
   
   reg [31:0] wdatat;
-  reg [7:0] mem[128] = '{default:12};
+  reg [7:0] mem[128];
   reg [31:0] retaddr;
   reg [31:0] nextaddr;
   reg first; /// check operation executed first time
+ 
+  //// mem initialization removed to avoid illegal combination of drivers
+  //// mem is written by always_comb block (write data channel FSM)
+  //// initial block conflicts with always_comb per SystemVerilog LRM
  
  
  
@@ -715,9 +725,6 @@ module axi_slave(
   reg [7:0] boundary;  ////storing boundary
   reg [3:0] wlen_count;
   
-  typedef enum bit [2:0] {widle = 0, wstart = 1, wreadys = 2, wvalids = 3, waddr_dec = 4} wstate_type;
-  wstate_type wstate, wnext_state;
-  
   always_comb
     begin
       case(wstate)
@@ -816,10 +823,6 @@ module axi_slave(
  
  ////////////////////////fsm for write response
  
- typedef enum bit [1:0] {bidle = 0, bdetect_last = 1, bstart = 2, bwait = 3} bstate_type;
- bstate_type bstate,bnext_state;
- 
- 
  always_comb
  begin
    case(bstate)
@@ -861,6 +864,12 @@ module axi_slave(
  
  ////////////////////////fsm for read address
  
+ typedef enum bit [1:0] {aridle = 0, arstart = 1, arreadys = 2} arstate_type;
+ arstate_type arstate, arnext_state;
+ 
+ typedef enum bit [2:0] {ridle = 0, rstart = 1, rwait = 2, rvalids = 3, rerror = 4} rstate_type;
+ rstate_type rstate, rnext_state;
+ 
  always_ff @(posedge clk, negedge resetn)
  begin
     if(!resetn)
@@ -875,9 +884,6 @@ module axi_slave(
        end
  end
  
- 
- typedef enum bit [1:0] {aridle = 0, arstart = 1, arreadys = 2} arstate_type;
- arstate_type arstate, arnext_state;
  
  reg [31:0] araddrt; ///register address
  
@@ -1034,9 +1040,6 @@ module axi_slave(
  bit [31:0] rdnextaddr, rdretaddr;
  reg [3:0] len_count;
  reg [7:0] rdboundary;
- 
- typedef enum bit [2:0] {ridle = 0, rstart = 1, rwait = 2, rvalids = 3, rerror = 4} rstate_type;
- rstate_type rstate, rnext_state;
  
  /////////////////////////////////
  always_comb
